@@ -33,4 +33,5 @@
  */
 export function calculateAutoFare(distance, waitingMinutes = 0) {
   // Your code here
+  
 }
