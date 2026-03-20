@@ -31,4 +31,10 @@
  */
 export function sabziMandiBill(shoppingList, priceList) {
   // Your code here
+
+  for( let item of shoppingList){
+
+    
+
+
 }
