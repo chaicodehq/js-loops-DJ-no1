@@ -30,11 +30,30 @@
  *   // => { items: [], totalBill: 0 }
  */
 export function sabziMandiBill(shoppingList, priceList) {
-  // Your code here
+  let items = [];
+  let totalBill = 0;
 
-  for( let item of shoppingList){
+  for (let item of shoppingList) {
+    const sabziName = item.name;
+    const sabziQty = item.qty;
 
-    
+    // Check if sabzi is available
+    if (!priceList.hasOwnProperty(sabziName)) {
+      continue;
+    }
 
+    const sabziPrice = priceList[sabziName];
 
+    // Check if price is too high
+    if (sabziPrice > 80) {
+      continue;
+    }
+
+    // Calculate cost and add to items and totalBill
+    const sabziCost = sabziPrice * sabziQty;
+    items.push({ name: sabziName, qty: sabziQty, cost: sabziCost });
+    totalBill += sabziCost;
+  }
+  console.log(items, totalBill);
+  return { items, totalBill };
 }
