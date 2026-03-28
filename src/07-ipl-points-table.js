@@ -46,10 +46,26 @@ export function iplPointsTable(matches) {
   for (const match of matches) {
     const { team1, team2, result, winner } = match;
     if (!teams[team1]) {
-      teams[team1] = { team: team1, played: 0, won: 0, lost: 0, tied: 0, noResult: 0, points: 0 };
+      teams[team1] = {
+        team: team1,
+        played: 0,
+        won: 0,
+        lost: 0,
+        tied: 0,
+        noResult: 0,
+        points: 0,
+      };
     }
     if (!teams[team2]) {
-      teams[team2] = { team: team2, played: 0, won: 0, lost: 0, tied: 0, noResult: 0, points: 0 };
+      teams[team2] = {
+        team: team2,
+        played: 0,
+        won: 0,
+        lost: 0,
+        tied: 0,
+        noResult: 0,
+        points: 0,
+      };
     }
     if (result === "win") {
       if (winner === team1) {
@@ -58,16 +74,13 @@ export function iplPointsTable(matches) {
         teams[team1].points += 2;
         teams[team2].played++;
         teams[team2].lost++;
-      }
-      else if (winner === team2) {
+      } else if (winner === team2) {
         teams[team2].played++;
         teams[team2].won++;
         teams[team2].points += 2;
         teams[team1].played++;
         teams[team1].lost++;
       }
-
-
     } else if (result === "tie") {
       teams[team1].played++;
       teams[team2].played++;
@@ -75,9 +88,7 @@ export function iplPointsTable(matches) {
       teams[team2].tied++;
       teams[team1].points += 1;
       teams[team2].points += 1;
-
-    }
-    else if (result === "no_result") {
+    } else if (result === "no_result") {
       teams[team1].played++;
       teams[team2].played++;
       teams[team1].noResult++;
@@ -88,9 +99,8 @@ export function iplPointsTable(matches) {
   }
 
   const pointsTable = Object.values(teams);
-  pointsTable.sort((a, b) => b.points - a.points || a.team.localeCompare(b.team));
+  pointsTable.sort(
+    (a, b) => b.points - a.points || a.team.localeCompare(b.team),
+  );
   return pointsTable;
-
-  
-
 }

@@ -42,9 +42,19 @@
  *   // => { months: -1, totalPaid: -1, totalInterest: -1 }
  */
 export function calculateEMI(principal, monthlyRate, emi) {
-  // Your code here
+  // Validation
+  if (
+    typeof principal !== "number" ||
+    typeof monthlyRate !== "number" ||
+    typeof emi !== "number" ||
+    principal <= 0 ||
+    monthlyRate <= 0 ||
+    emi <= 0
+  ) {
+    return { months: -1, totalPaid: -1, totalInterest: -1 };
+  }
 
-  if (typeof principal !== "number" || typeof monthlyRate !== "number" || typeof emi !== "number" || principal <= 0 || monthlyRate <= 0 || emi <= 0) {
+  if (emi <= principal * monthlyRate) {
     return { months: -1, totalPaid: -1, totalInterest: -1 };
   }
 
@@ -65,9 +75,13 @@ export function calculateEMI(principal, monthlyRate, emi) {
       totalPaid += emi;
       remaining -= emi;
     }
+
     months++;
   }
 
-  return { months, totalPaid, totalInterest };
-
+  return {
+    months,
+    totalPaid: Math.round(totalPaid * 100) / 100,
+    totalInterest: Math.round(totalInterest * 100) / 100,
+  };
 }
